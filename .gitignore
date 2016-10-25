@@ -11,8 +11,6 @@ build/
 prod/
 dist/
 css/
-js/
-assets/sprites/
 
 ###############################################################################
 # Accept these files
