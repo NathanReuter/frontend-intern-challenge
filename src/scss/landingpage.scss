@@ -1,0 +1,176 @@
+.landingpage {
+     header {
+         padding: 15px 0 10px;
+         background: $white;
+     }
+
+    .main-jumbotron {
+        background: url("../assets/img/background-home.jpg") no-repeat center center;
+        background-size: cover;
+        padding: 50px;
+
+        .container {
+            padding-top: 15%;
+            padding-bottom: 15%;
+        }
+
+
+        .title {
+            max-width: 400px;
+            margin: 0 auto;
+
+            h1, h5 {
+                color: $background-white;
+            }
+
+            h1 {
+                font-family: 'Roboto Slab', 'Roboto', 'serif';
+                font-size: xx-large;
+                font-weight: 700;
+                margin-bottom: 5px;
+            }
+
+            h5 {
+                margin-top: 5px;
+                font-weight: 400;
+            }
+        }
+
+
+        .main-form {
+            padding-top: 40px;
+            width: 400px;
+            margin: 0 auto;
+
+            .form-button {
+                @extend .btn;
+                background: $orange-juice;
+                color: white;
+                font-weight: bold;
+            }
+
+            .form-input {
+                @extend .input;
+                width: 90%;
+                padding: 10px 40px 10px 0;
+                border-bottom: 2px solid #ff6e14;
+                color: #ff6e14;
+                margin-bottom: 20px;
+                margin-left: 12px;
+
+
+                &:focus {
+                    outline: 0;
+                }
+
+                &::-webkit-input-placeholder {
+                    color:  $orange-juice;
+                }
+
+                &:-ms-input-placeholder{
+                    color:  $orange-juice;
+                }
+
+                &:-moz-placeholder {
+                    color:  $orange-juice;
+                    opacity:    1;
+                }
+
+                &::-moz-placeholder{
+                    color:  $orange-juice;
+                    opacity:    1;
+                }
+            }
+
+            #copy-input {
+                color: $white;
+                font-weight: bold;
+            }
+
+            .copy-input-cancel {
+                color: $white;
+                position: relative;
+                right: -145px;
+                top: -47px;
+            }
+        }
+    }
+
+    .main-content {
+        .top-5, .hits {
+            color: $chaordic-red;
+            margin: 40px;
+            padding-bottom: 30px;
+
+            h3 {
+                font-family: 'Roboto Slab', 'Roboto', 'serif';
+                font-weight: 400;
+                font-size: xx-large;
+            }
+        }
+
+        .top-5 {
+            ul {
+                list-style: none;
+
+                .top-link {
+                    @extend .chaordic-link;
+                    font-weight: bold;
+
+                }
+
+                .top-hits {
+                    color: $support-gray;
+                }
+            }
+        }
+
+        .hits {
+            .highlight {
+                border: 1px solid $light-gray;
+                background: $white;
+                display: inline-block;
+                padding: 5px;
+                border-radius: 5px;
+                margin: 0;
+            }
+
+            p {
+                color: $support-gray;
+            }
+        }
+    }
+
+  .footer {
+      padding: 15px;
+      background: $white;
+
+      a {
+          @extend .chaordic-link;
+      }
+
+      .social-icons {
+          color: $support-gray;
+      }
+  }
+}
+
+@media (max-width: 768px) {
+    .landingpage {
+        .main-jumbotron {
+            .main-form, .title {
+                width: auto;
+            }
+
+            .main-form {
+                .form-input {
+                    text-align: center;
+                }
+            }
+        }
+
+        #top-links-list {
+            padding: 0;
+        }
+    }
+}
