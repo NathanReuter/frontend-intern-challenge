@@ -25,14 +25,16 @@ module.exports = function (grunt) {
 
         config: configs,
 
-
-        // Enviroment variables configurations
-        env: {
-            test: {
-                NODE_ENV: 'test'
+        processhtml: {
+            options: {
+                data: {
+                    message: 'Hello world!'
+                }
             },
-            prod: {
-                NODE_ENV: 'prod'
+            dist: {
+                files: {
+                    '<%= config.distPath %>/index.html': ['<%= config.app %>/index.html']
+                }
             }
         },
 
@@ -42,47 +44,15 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: 'assets/images',
-                        src: ['assets/sprites/sprites.png'],
-                        dest: '<%= config.productionPath %>/assets/sprites/'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'assets/imagesNoSprite',
+                        cwd: '<%= config.app %>/assets/img/',
                         src: ['**/*.{png,jpg,gif}'],
-                        dest: '<%= config.productionPath %>/assets/imagesNoSprite/'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'assets/images',
-                        src: ['**/*.{png,jpg,gif}'],
-                        dest: '<%= config.productionPath %>/assets/images/'
+                        dest: '<%= config.distPath %>/assets/img/'
                     }
                 ]
             }
         },
 
-        sprite: {
-            all: {
-                src: 'assets/images/**/*.png',
-                dest: 'assets/sprites/sprites.png',
-                destCss: 'assets/css/sprites.css',
-                padding: 5
-            },
-            build: {
-                src: 'assets/images/**/*.png',
-                dest: 'assets/sprites/sprites.png',
-                destCss: 'assets/css/sprites.css'
-            },
-            prod: {
-                src: '<%= config.app %>/assets/images/**/*.png',
-                dest: '<%= config.productionPath %>/assets/sprites/sprites.png',
-                destCss: 'assets/css/sprites.css',
-                imgPath: '../assets/sprites/sprites.png'
-            }
-        },
-
-        // Compile Stylus files into CSS files
+        // Compile Sass files into CSS files
         sass: {
             options: {
                 sourceMap: true
@@ -94,29 +64,10 @@ module.exports = function (grunt) {
             }
         },
 
-
-        postcss: {
-            options: {
-                map: true,
-                processors: [
-                    require('autoprefixer')({browsers: 'Chrome >= 20, Firefox >= 20, Safari >= 8, Explorer >= 10'})
-                ]
-            },
-            build: {
-                src: '<%= config.buildPath %>/css/main.css'
-            },
-            prod: {
-                src: '<%= config.app %>/css/main.css'
-            }
-        },
-
-
         // SCSS lint
         scsslint: {
             allFiles: [
-                '<%= config.app %>/app/**/*.scss',
-                '<%= config.app %>/assets/scss/*.scss',
-                '<%= config.app %>/components/**/*.scss'
+                '<%= config.app %>/scss/*.scss',
             ],
             options: {
                 colorizeOutput: true,
@@ -130,28 +81,22 @@ module.exports = function (grunt) {
         clean: {
             build: {
                 src: [
-                    '<%= config.tempPath %>',
                     '<%= config.distPath %>',
                     '<%= config.buildPath %>'
                 ]
             },
-            prod: {
+            dist: {
                 options: {
                     force: true
                 },
                 src: [
-                    '<%= config.tempPath %>',
-                    '<%= config.distPath %>',
                     '<%= config.buildPath %>',
-                    '<%= config.productionPath %>'
+                    '<%= config.distPath %>'
                 ]
             },
             after: {
                 src: [
-                    '<%= config.app %>/js',
-                    '<%= config.app %>/css',
-                    '<%= config.tempPath %>',
-                    '<%= config.distPath %>'
+                    '<%= config.buildPath %>'
                 ]
             }
         },
@@ -191,13 +136,27 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: [
+                    // {
+                    //     expand: true,
+                    //     cwd: '<%= config.app %>/',
+                    //     src: ['index.html'],
+                    //     dest: '<%= config.distPath %>/',
+                    //     flatten: true,
+                    //     filter: 'isFile'
+                    // },
                     {
                         expand: true,
-                        cwd: '<%= config.app %>/',
-                        src: ['index.html'],
-                        dest: '<%= config.distPath %>/',
+                        cwd: '<%= config.app %>/assets/',
+                        src: ['urls.json'],
+                        dest: '<%= config.distPath %>/assets/',
                         flatten: true,
                         filter: 'isFile'
+                    },
+                    {
+                        expand: true,
+                        cwd: './',
+                        src: ['bower_components/**'],
+                        dest: '<%= config.distPath %>/'
                     }
                 ]
             }
@@ -221,7 +180,7 @@ module.exports = function (grunt) {
 
         // Prepare files to be compressed and uglified
         useminPrepare: {
-            html: ['<%= config.app %>/index.html'],
+            html: ['<%= config.buildPath %>/index.html'],
             options: {
                 dest: '<%= config.distPath %>/',
                 flow: {
@@ -232,6 +191,18 @@ module.exports = function (grunt) {
                         },
                         post: {}
                     }
+                }
+            }
+        },
+
+        cssmin: {
+            options: {
+                shorthandCompacting: false,
+                roundingPrecision: -1
+            },
+            target: {
+                files: {
+                    '<%= config.distPath %>/css/main.css': ['<%= config.buildPath %>/css/main.css']
                 }
             }
         },
@@ -250,13 +221,8 @@ module.exports = function (grunt) {
             prod: {
                 files: [{
                     expand: true,
-                    cwd: '<%= config.distPath %>/js/',
-                    src: 'app.js',
-                    dest: '<%= config.distPath %>/js/'
-                }, {
-                    expand: true,
-                    cwd: '<%= config.distPath %>/js/',
-                    src: 'vendor.js',
+                    cwd: '<%= config.buildPath %>/js/',
+                    src: '**',
                     dest: '<%= config.distPath %>/js/'
                 }]
             }
@@ -338,6 +304,16 @@ module.exports = function (grunt) {
                 ],
                 tasks: ['copy:build']
             }
+        },
+
+        concat: {
+            options: {
+                separator: ';'
+            },
+            dist: {
+                src: ['<%= config.app %>/js/util.js', '<%= config.app %>/js/chaordic.js'],
+                dest: '<%= config.buildPath %>/js/app.js'
+            }
         }
     });
 
@@ -346,50 +322,24 @@ module.exports = function (grunt) {
      * Registered Tasks
      ************************************************************************/
 
-    grunt.registerTask('lint', [
-        'jshint',
-        'jscs',
-        'scsslint'
-    ]);
-
-
-    grunt.registerTask('test', [
-        'html2js:tests',
-        'env:test',
-        'karma'
-    ]);
-
-
     grunt.registerTask('build', [
         'clean:build',
-        // 'sprite:build',
         'sass:build',
-        // 'postcss:build',
         'copy:build'
     ]);
 
 
-    grunt.registerTask('production', [
-        'clean:prod',
-        'lint',
-        'env:prod',
-        'wiredep:prod',
-        'html2js:prod',
-        'sprite:prod',
-        'copy:dist',
-        'sass:prod',
-        'postcss:prod',
+    grunt.registerTask('dist', [
+        'clean:dist',
+        'sass:build',
         'useminPrepare',
-        'concat:generated',
-        'cssmin:generated',
-        'ngAnnotate',
+        'concat',
+        'cssmin',
         'uglify',
-        'filerev',
         'usemin',
-        'copy:prod',
-        'ngconstant:prod',
         'imagemin',
-        'htmlmin',
+        'processhtml:dist',
+        'copy:dist',
         'clean:after'
     ]);
 
@@ -401,8 +351,5 @@ module.exports = function (grunt) {
     ]);
 
 
-    grunt.registerTask('server', function (target) {
-        grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` next time.');
-        grunt.task.run([target ? ('serve:' + target) : 'serve']);
-    });
+    grunt.registerTask('default', ['serve']);
 };
