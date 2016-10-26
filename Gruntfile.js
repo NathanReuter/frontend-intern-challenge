@@ -64,19 +64,6 @@ module.exports = function (grunt) {
             }
         },
 
-        // SCSS lint
-        scsslint: {
-            allFiles: [
-                '<%= config.app %>/scss/*.scss',
-            ],
-            options: {
-                colorizeOutput: true,
-                maxBuffer: 2000 * 1024,
-                config: '<%= config.app %>/.scss-lint.yml'
-            }
-        },
-
-
         // Remove desired directories
         clean: {
             build: {
@@ -161,22 +148,6 @@ module.exports = function (grunt) {
                 ]
             }
         },
-
-
-        // Add hash on file name to avoid caching
-        filerev: {
-            options: {
-                algorithm: 'md5',
-                length: 4
-            },
-            prod: {
-                src: [
-                    '<%= config.distPath %>/js/**/*.js',
-                    '<%= config.distPath %>/css/**/*.css'
-                ]
-            }
-        },
-
 
         // Prepare files to be compressed and uglified
         useminPrepare: {
