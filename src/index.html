@@ -8,68 +8,72 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div class="landingpage">
-        <header class="container-fluid text-center">
-            <img src="assets/img/logo-chaordic.png" alt="Logo da Chaordic">
-        </header>
-        <section class="main-jumbotron">
-            <div class="container">
-                <div class="text-center title">
-                    <h1>Encurte seus links.</h1>
-                    <h5>Links são longos. Encurte os links que você deseha compartilhar,<br>
-                        e acompanhe enquanto viajam através da internet.</h5>
-                </div>
-                <div class="text-center main-form">
-                    <!-- Before Click -->
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <input class="form-input" id="link-input" type="text" placeholder="Cole o seu link aqui">
-                        </div>
-                        <div class="col-sm-4">
-                            <a class="form-button" id="shorten-button">ENCURTAR</a>
-                        </div>
+<div class="landingpage">
+    <header class="container-fluid text-center">
+        <img src="assets/img/logo-chaordic.png" alt="Logo da Chaordic">
+    </header>
+    <section class="main-jumbotron">
+        <div class="container">
+            <div class="text-center title">
+                <h1>Encurte seus links.</h1>
+                <h5>Links são longos. Encurte os links que você deseha compartilhar,<br>
+                    e acompanhe enquanto viajam através da internet.</h5>
+            </div>
+            <div class="text-center main-form">
+                <!-- Before Click -->
+                <div class="row">
+                    <div class="col-sm-8">
+                        <input class="form-input" id="link-input" type="text" placeholder="Cole o seu link aqui">
                     </div>
+                    <div class="col-sm-4">
+                        <a class="form-button" id="shorten-button">ENCURTAR</a>
+                    </div>
+                </div>
 
-                    <!-- After Click -->
-                    <div class="row">
-                        <div class="col-sm-8">
-                            <input class="form-input" id="copy-input" type="text" placeholder="Cole o seu link aqui">
-                            <a class="copy-input-cancel" href=""><i class="fa fa-times" aria-hidden="true"></i></a>
-                        </div>
-                        <div class="col-sm-4">
-                            <a class="form-button" id="copy-button">COPIAR</a>
-                        </div>
+                <!-- After Click -->
+                <div class="row">
+                    <div class="col-sm-8">
+                        <input class="form-input" id="copy-input" type="text" placeholder="Cole o seu link aqui">
+                        <a class="copy-input-cancel" href=""><i class="fa fa-times" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="col-sm-4">
+                        <a class="form-button" id="copy-button">COPIAR</a>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+    <main class="main-content container">
+        <section class="top-5 text-center">
+            <h3>TOP 5</h3>
+            <ul id="top-links-list"></ul>
         </section>
-        <main class="main-content container">
-            <section class="top-5 text-center">
-                <h3>TOP 5</h3>
-                <ul id="top-links-list"></ul>
-            </section>
-            <section class="hits text-center">
-                <h3>HITS</h3>
-                <h3 class="highlight">35.713.571</h3>
-                <p>Cliques em links</p>
-            </section>
-        </main>
-        <footer class="container-fluid footer">
-            <div class="row">
-                <div class="col-sm-4 text-center">
-                    <a href="http://chaordic.com.br">chr.dc</a>
-                </div>
-                <div class="col-sm-4 col-sm-offset-4 text-center">
-                    <a class="social-icons" href="" target="_blank">TWITTERICON</a>
-                    <a class="social-icons" href="" target="_blank">FACEICON</a>
-                </div>
+        <section class="hits text-center">
+            <h3>HITS</h3>
+            <h3 class="highlight">35.713.571</h3>
+            <p>Cliques em links</p>
+        </section>
+    </main>
+    <footer class="container-fluid footer">
+        <div class="row">
+            <div class="col-sm-4 text-center">
+                <a href="http://chaordic.com.br">chr.dc</a>
             </div>
-        </footer>
-    </div>
+            <div class="col-sm-4 col-sm-offset-4 text-center">
+                <a class="social-icons" href="https://twitter.com/chaordic" target="_blank">
+                    <img src="assets/img/icon-twitter.png" alt="">
+                </a>
+                <a class="social-icons" href="https://www.facebook.com/chaordic.com.br" target="_blank">
+                    <img src="assets/img/icon-facebook.png" alt="">
+                </a>
+            </div>
+        </div>
+    </footer>
+</div>
 
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../bower_components/lodash/dist/lodash.min.js"></script>
-    <script src="js/util.js"></script>
-    <script src="js/chaordic.js"></script>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/lodash/dist/lodash.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/chaordic.js"></script>
 </body>
 </html>
