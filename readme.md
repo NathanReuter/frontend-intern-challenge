@@ -1,3 +1,11 @@
+## Instructions for the nathan-reuter branch
+
+Run: `npm install && bower install`
+
+For testing: `grunt` or `grunt serve`
+For distribution: `grunt dist` 
+
+========================================================================
 # Desafio estagiário: HTML/CSS/JS
 
 > **ATENÇÃO:** Antes de começar, se [cadastre na vaga](https://chaordic.recruiterbox.com/jobs/fk0hzkv/) via Recruiterbox **=]**
