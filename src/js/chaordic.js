@@ -1,5 +1,7 @@
 /**
- * Created by nathan on 25/10/16.
+ *  Created by nathan on 25/10/16.
+ *  Main landingPage file
+ *  Contains all DOM manipulation and business logic
  */
 
 (function (window, document, $, _, util) {
@@ -29,6 +31,9 @@
                 cancelButton.fadeIn();
             },
 
+            /* Given an url, creates a date with the shortened link
+            *  @param linkUrl {String}. The url it self.
+            *  @return linkObj {Object}.*/
             linkShortener = function (linkUrl) {
                 var linkObj = {
                     id: String(util.randomFiveDigitsNumber()),
@@ -41,6 +46,9 @@
                 return linkObj;
             },
 
+            /*  Add the DOM elements for one list item
+            *   @param refElement {JQuery Object}. A Jquery element referring to where the list will be appended
+            *   @param data {Object}. Data that will be used inside the elements*/
             createTopListElements = function (refElement, data) {
                 refElement.append(
                     $('<li></li>')
@@ -61,10 +69,10 @@
                 )
             },
 
-            /* Add links to the page
-             * Receives a collection of links and append into the page the top max links.
-             * @param links {Array}. An array of links
-             * @param max {Number}. Max of links that will be added
+            /*  Add links to the page
+             *  Receives a collection of links and append into the page the top max links.
+             *  @param links {Array}. An array of links
+             *  @param max {Number}. Max of links that will be added
              * */
             addLinks = function (links, max) {
                 _.chain(links)
@@ -76,6 +84,9 @@
             },
 
             addButtonsListeners = function () {
+                /*  Listener for the shortenButton
+                *   OnClick, checks if there is some data in shortInput,
+                *   if so, than create a newLinkData and add to the links collections*/
                 shortenButton.on('click', function () {
                     var url = shortenInput.val(),
                         newLinkData;
@@ -89,6 +100,8 @@
 
                 });
 
+                /*  Listener for the copyButton
+                *   Copies the shortenUrl previus created to the clipboard.*/
                 copyButton.on('click', function () {
                     copyInput.select();
 
